@@ -1,3 +1,5 @@
+# !/usr/bin/env python
+# coding=utf-8
 
 try:
     # For Spark >= 2.0
@@ -43,7 +45,7 @@ if __name__ == '__main__':
         # load local file
         lines = spark.read.text('file://' + sys.argv[1]).rdd.map(lambda r: r[0])
     else:
-        sc = SparkContext(appName='TopTwitter')
+        sc = SparkContext(appName='TopTweet')
         # load local file
         lines = sc.textFile('file://' + sys.argv[1], 1)
     counts = lines.map(lambda x: x.split(';;;;')) \
