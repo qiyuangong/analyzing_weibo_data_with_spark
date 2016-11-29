@@ -9,7 +9,6 @@ except ImportError:
     from pyspark import SparkContext
 import math
 from operator import add
-from distribution import main
 import re
 import sys
 
@@ -28,7 +27,7 @@ if __name__ == '__main__':
         sc = SparkContext(appName='TopTopic')
         # load local file
         lines = sc.textFile('file://' + sys.argv[1], 1)
-    counts = lines.map(lambda x: x.split(';;')[1]) \
+    counts = lines.map(lambda x: x.split(';;;;')[1]) \
         .map(lambda x: int(x.split(' ')[1].split(':')[0])) \
         .map(lambda x: (x, 1)) \
         .reduceByKey(add)

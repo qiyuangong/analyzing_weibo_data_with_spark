@@ -32,7 +32,7 @@ if __name__ == '__main__':
         sc = SparkContext(appName='TopTopic')
         # load local file
         lines = sc.textFile('file://' + sys.argv[1], 1)
-    counts = lines.map(lambda x: x.split(';;')) \
+    counts = lines.map(lambda x: x.split(';;;;')) \
         .map(lambda x: x[-1].strip()) \
         .map(lambda x: (x, 1)) \
         .reduceByKey(add)

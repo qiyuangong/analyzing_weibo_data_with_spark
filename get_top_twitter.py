@@ -19,7 +19,10 @@ def get_score(line):
     score =  forward + like + comments
     """
     # simple ranking algorithm for twitter
-    return int(line[4]) + int(line[5]) + int(line[6])
+    try:
+        return int(line[4]) + int(line[5]) + int(line[6])
+    except:
+        print "ERROR" + ';;;;'.join(line)
 
 
 if __name__ == '__main__':
@@ -43,12 +46,12 @@ if __name__ == '__main__':
         sc = SparkContext(appName='TopTwitter')
         # load local file
         lines = sc.textFile('file://' + sys.argv[1], 1)
-    counts = lines.map(lambda x: x.split(';;')) \
+    counts = lines.map(lambda x: x.split(';;;;')) \
         .map(lambda x: (get_score(x), x))
     output = counts.top(k)
     for index, mes in enumerate(output):
         if index < k:
-            print "Top twitter %d: %s" % (index, ';;'.join(mes[1]))
+            print "Top twitter %d: %s" % (index, ';;;;'.join(mes[1]))
     if FLAG:
         spark.stop()
     else:
