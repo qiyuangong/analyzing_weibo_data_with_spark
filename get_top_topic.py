@@ -27,7 +27,7 @@ if __name__ == '__main__':
         spark = SparkSession\
             .builder\
             .appName("TopTopic")\
-            .getOrCreater()
+            .getOrCreate()
         # load local file
         lines = spark.read.text('file://' + sys.argv[1]).rdd.map(lambda r: r[0])
     else:
